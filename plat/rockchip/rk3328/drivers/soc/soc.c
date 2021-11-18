@@ -16,6 +16,7 @@
 #include <plat_private.h>
 #include <rk3328_def.h>
 #include <soc.h>
+#include <efuse.h>
 
 /* Table of regions to map using the MMU. */
 const mmap_region_t plat_rk_mmap[] = {
@@ -152,6 +153,11 @@ void plat_rockchip_soc_init(void)
 {
 	secure_timer_init();
 	sgrf_init();
+
+	mode_init(1);
+	mode_init(0);
+
+	enable_efuse_clk();
 
 	NOTICE("BL31:Rockchip release version: v%d.%d\n",
 	       MAJOR_VERSION, MINOR_VERSION);
